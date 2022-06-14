@@ -7,6 +7,7 @@ specifiers:
   '@nestjs/core': ^8.0.0
   '@nestjs/platform-express': ^8.0.0
   '@nestjs/schematics': ^8.0.0
+  '@nestjs/swagger': ^5.2.1
   '@nestjs/testing': ^8.0.0
   '@types/express': ^4.17.13
   '@types/jest': 27.0.2
@@ -21,12 +22,14 @@ specifiers:
   helmet: ^5.1.0
   jest: ^27.2.5
   js-yaml: ^4.1.0
+  module-alias: ^2.2.2
   prettier: ^2.3.2
   reflect-metadata: ^0.1.13
   rimraf: ^3.0.2
   rxjs: ^7.2.0
   source-map-support: ^0.5.20
   supertest: ^6.1.3
+  swagger-ui-express: ^4.4.0
   ts-jest: ^27.0.3
   ts-loader: ^9.2.3
   ts-node: ^10.0.0
@@ -38,11 +41,13 @@ dependencies:
   '@nestjs/config': 2.1.0_8341a45f76a60f560bbeb12c24253aeb
   '@nestjs/core': 8.4.6_95015279855349ef3fc3851e24d75fe7
   '@nestjs/platform-express': 8.4.6_24ca02718c236197ee32dbe80f8a4d36
+  '@nestjs/swagger': 5.2.1_1303a0d9aa1d86a30015480e850cef97
   helmet: 5.1.0
   js-yaml: 4.1.0
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.5
+  swagger-ui-express: 4.4.0
 
 devDependencies:
   '@nestjs/cli': 8.2.6
@@ -59,6 +64,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.17.0
   eslint-plugin-prettier: 4.0.0_a088652d234d3f0e6595b5f3073e25de
   jest: 27.5.1_ts-node@10.8.1
+  module-alias: 2.2.2
   prettier: 2.6.2
   source-map-support: 0.5.21
   supertest: 6.2.3
@@ -882,6 +888,23 @@ packages:
       - encoding
     dev: false
 
+  /@nestjs/mapped-types/1.0.1_2f3d54264854175e3c272031835a79e8:
+    resolution: {integrity: sha512-NFvofzSinp00j5rzUd4tf+xi9od6383iY0JP7o0Bnu1fuItAUkWBgc4EKuIQ3D+c2QI3i9pG1kDWAeY27EMGtg==}
+    peerDependencies:
+      '@nestjs/common': ^7.0.8 || ^8.0.0
+      class-transformer: ^0.2.0 || ^0.3.0 || ^0.4.0 || ^0.5.0
+      class-validator: ^0.11.1 || ^0.12.0 || ^0.13.0
+      reflect-metadata: ^0.1.12
+    peerDependenciesMeta:
+      class-transformer:
+        optional: true
+      class-validator:
+        optional: true
+    dependencies:
+      '@nestjs/common': 8.4.6_e7ea248743279784063e3708d703abc5
+      reflect-metadata: 0.1.13
+    dev: false
+
   /@nestjs/platform-express/8.4.6_24ca02718c236197ee32dbe80f8a4d36:
     resolution: {integrity: sha512-OserZ+RwjMyECFAL0/12Bztf63EnFhlFUEJ4/a502RQ0eZogt4M3ROauaW4bpt2Q3YH4hy0eT+4eqkVOMzjtPQ==}
     peerDependencies:
@@ -926,6 +949,32 @@ packages:
     transitivePeerDependencies:
       - chokidar
     dev: true
+
+  /@nestjs/swagger/5.2.1_1303a0d9aa1d86a30015480e850cef97:
+    resolution: {integrity: sha512-7dNa08WCnTsW/oAk3Ujde+z64JMfNm19DhpXasFR8oJp/9pggYAbYU927HpA+GJsSFJX6adjIRZsCKUqaGWznw==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      fastify-swagger: '*'
+      reflect-metadata: ^0.1.12
+      swagger-ui-express: '*'
+    peerDependenciesMeta:
+      fastify-swagger:
+        optional: true
+      swagger-ui-express:
+        optional: true
+    dependencies:
+      '@nestjs/common': 8.4.6_e7ea248743279784063e3708d703abc5
+      '@nestjs/core': 8.4.6_95015279855349ef3fc3851e24d75fe7
+      '@nestjs/mapped-types': 1.0.1_2f3d54264854175e3c272031835a79e8
+      lodash: 4.17.21
+      path-to-regexp: 3.2.0
+      reflect-metadata: 0.1.13
+      swagger-ui-express: 4.4.0
+    transitivePeerDependencies:
+      - class-transformer
+      - class-validator
+    dev: false
 
   /@nestjs/testing/8.4.6_03b407c3241153e9ad0ceeeb1e5e2cac:
     resolution: {integrity: sha512-uGRNQ0iWIHqjz5CLxQCTtQ3dB1KyPfkHXnko5mBwKk/iBTiACmll61rVt89Wh8RM+w0bmvCHp9sacNI7IynESg==}
@@ -3869,6 +3918,10 @@ packages:
       minimist: 1.2.6
     dev: false
 
+  /module-alias/2.2.2:
+    resolution: {integrity: sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==}
+    dev: true
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -4679,6 +4732,19 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /swagger-ui-dist/4.12.0:
+    resolution: {integrity: sha512-B0Iy2ueXtbByE6OOyHTi3lFQkpPi/L7kFOKFeKTr44za7dJIELa9kzaca6GkndCgpK1QTjArnoXG+aUy0XQp1w==}
+    dev: false
+
+  /swagger-ui-express/4.4.0:
+    resolution: {integrity: sha512-1CzRkHG386VQMVZK406jcpgnW2a9A5A/NiAjKhsFTQqUBWRF+uGbXTU/mA7WSV3mTzyOQDvjBdWP/c2qd5lqKw==}
+    engines: {node: '>= v0.10.32'}
+    peerDependencies:
+      express: '>=4.0.0'
+    dependencies:
+      swagger-ui-dist: 4.12.0
+    dev: false
 
   /symbol-observable/4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
