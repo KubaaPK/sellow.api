@@ -15,4 +15,15 @@ const createUser = applyDecorators(
   ApiResponse({ status: 500, description: 'Internal server error.' }),
 );
 
-export { createUser };
+const activateUser = applyDecorators(
+  ApiOperation({ summary: 'Activate a user.', tags: ['Auth'] }),
+  ApiResponse({ status: 200, description: 'User has been activated.' }),
+  ApiResponse({
+    status: 422,
+    description:
+      'User cannot be activated. Has not been found or is already activated.',
+  }),
+  ApiResponse({ status: 500, description: 'Internal server error.' }),
+);
+
+export { createUser, activateUser };
