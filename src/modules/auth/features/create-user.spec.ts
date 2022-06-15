@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { TestUtilsModule, TestUtilsService } from '../../../utils/test-utils';
 import { UserEntity } from '../entities';
+import { FirebaseAuthService } from '../firebase-auth';
 import { CreateUser, CreateUserHandler } from './create-user';
 
 describe('CreateUserHandler', () => {
@@ -13,7 +14,16 @@ describe('CreateUserHandler', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [TestUtilsModule, TypeOrmModule.forFeature([UserEntity])],
-      providers: [TestUtilsService, CreateUserHandler],
+      providers: [
+        TestUtilsService,
+        CreateUserHandler,
+        {
+          provide: FirebaseAuthService,
+          useValue: {
+            createUser: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     testUtils = module.get(TestUtilsService);

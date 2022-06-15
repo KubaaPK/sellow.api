@@ -6,6 +6,10 @@
       {
         "include": "**/*.yaml",
         "watchAssets": true
+      },
+      {
+        "include": "**/*.json",
+        "watchAssets": true
       }
     ]
   }

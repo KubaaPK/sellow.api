@@ -35,3 +35,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .config.yaml
+src/modules/auth/firebase-auth/secret.json
