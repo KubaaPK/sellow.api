@@ -1,11 +1,17 @@
 import { ConflictException, Logger } from '@nestjs/common';
-import { CommandHandler, ICommand, ICommandHandler } from '@nestjs/cqrs';
+import {
+  CommandHandler,
+  EventBus,
+  ICommand,
+  ICommandHandler,
+} from '@nestjs/cqrs';
 import { ApiProperty } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { UserEntity } from '../entities';
 import { FirebaseAuthService } from '../firebase-auth';
+import { UserCreated } from '../integration-events';
 
 export class CreateUserRequest {
   @ApiProperty({ required: true })
@@ -30,6 +36,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUser> {
     @InjectRepository(UserEntity)
     private readonly _userRepository: Repository<UserEntity>,
     private readonly _firebaseAuthService: FirebaseAuthService,
+    private readonly _eventBus: EventBus,
   ) {}
 
   public async execute(command: CreateUser): Promise<any> {
@@ -56,5 +63,13 @@ export class CreateUserHandler implements ICommandHandler<CreateUser> {
       password,
       username,
     });
+
+    this._eventBus.publish(
+      new UserCreated({
+        id: createdUser.id,
+        email,
+        username,
+      }),
+    );
   }
 }

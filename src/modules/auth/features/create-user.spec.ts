@@ -1,4 +1,5 @@
 import { ConflictException } from '@nestjs/common';
+import { EventBus } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -19,9 +20,11 @@ describe('CreateUserHandler', () => {
         CreateUserHandler,
         {
           provide: FirebaseAuthService,
-          useValue: {
-            createUser: jest.fn(),
-          },
+          useValue: { createUser: jest.fn() },
+        },
+        {
+          provide: EventBus,
+          useValue: { publish: jest.fn() },
         },
       ],
     }).compile();
