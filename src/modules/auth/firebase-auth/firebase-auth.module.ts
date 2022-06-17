@@ -4,9 +4,10 @@ import * as firebaseAdmin from 'firebase-admin';
 
 import { FirebaseAuthOptions } from './firebase-auth.options';
 import { FirebaseAuthService } from './firebase-auth.service';
+import { FirebaseJwtStrategy } from './firebase-jwt.strategy';
 
 @Module({
-  providers: [FirebaseAuthService],
+  providers: [FirebaseAuthService, FirebaseJwtStrategy],
   exports: [FirebaseAuthService],
 })
 export class FirebaseAuthModule {

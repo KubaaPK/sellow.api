@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "paths": {
-      "@shared/infrastructure/*": ["src/shared/infrastructure/*"]
+      "@shared/infrastructure/*": ["src/shared/infrastructure/*"],
+      "@shared/abstractions/*": ["src/shared/abstractions/*"]
     }
   }
 }
